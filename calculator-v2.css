@@ -1,0 +1,50 @@
+#version{
+	float:right;
+}
+input[type="text"],select,input[type="number"]
+{
+	font-size:16px;
+}
+.noticecontainer{
+    background-color:#fff0b3;
+    padding:5px 5px 1px 5px;
+    border-radius:5px;
+}
+.noticecontainer ul{
+    margin:5px;
+}
+#calculator{
+    all: initial;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    margin: 0 auto;
+    display: table;
+	max-width: 650px;
+	min-width: 500px;
+	color: #000000;
+}
+table .right{
+	text-align: right;
+}
+.title{
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	width:100%;
+}
+.pricelist{
+	text-align: left;
+	border-collapse: collapse;
+	border-spacing: 0;
+	clear: both;
+	empty-cells: show;
+	width: 100%;
+}
+.pricelist th{
+	text-align: center;
+}
+.pricelist th, .pricelist td{
+	border: 1px solid #232323;
+	padding: 3px 5px;
+}

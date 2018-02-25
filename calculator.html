@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+     <meta charset="UTF-8">
+    <title>Leech BA RS3 Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+-->
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="calculator-v2.css" />
+
+</head>
+<body>
+
+    <div id='page'>
+        <div id='calculator'>
+
+        </div>
+    </div>
+
+	<div id='dev'>
+	</div>
+    <script type="text/babel">
+        var pricelist = {
+            'nm': {
+                round: '2L Waves 1-10 normal mode',
+                price: 10000000,
+                time: 20
+            },
+            'hm19': {
+                round: '2L Waves 1-9 hard mode',
+                price: 9000000,
+                time: 20
+            },
+            'king': {
+                round: '2L Wave 10 / King kill',
+                price: 12000000,
+                time: 20
+            },
+            'hm69': {
+                round: '2L Waves 6-9 hard mode',
+                price: 5000000,
+                time: 10
+            },
+            'nmsolo': {
+                round: '1L Waves 1-10 normal mode',
+                price: 20000000,
+                time: 20
+            },
+        }
+        function Display(screen){
+            switch(screen) {
+                case "Prices":
+                    return <Prices />;
+                case "Calculator":
+                    return <Calculator />;
+                default:
+                    return <Prices />;
+            }
+        }
+        class Main extends React.Component {
+            constructor(props) {
+                super(props);
+                this.history=["Prices"];
+            }
+            handleClick = () => {
+                alert("ha");
+            }
+            render() {
+                var screen = this.history.slice(-1).pop();
+                return (
+                    <div>
+                        <div>
+                            {screen}
+                        </div>
+                        <Display value={screen} />
+                    </div>
+                );
+            }
+        }
+        //<Prices></Prices>
+        //<button onClick={this.handleClick}>click me</button>
+        class Prices extends React.Component {
+            constructor(props){
+                super(props);
+                this.name = "Prices";
+            }
+
+            render() {
+                return (
+                    <div>
+                        <span className="title">Prices</span>
+                        <table className="pricelist">
+                            <thead>
+                            <tr>
+                                <th>Round</th>
+                                <th>Price</th>
+                                <th>Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {Object.keys(pricelist).map(key => (
+                                <tr key={"pricelist_"+key}>
+                                    <td> {pricelist[key].round} </td>
+                                    <td className="right"> {Intl.NumberFormat(navigator.language).format(pricelist[key].price)} </td>
+                                    <td className="right"> {pricelist[key].time} minutes </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+                );
+            }
+        }
+
+        class Calculator extends React.Component {
+            constructor(props){
+                super(props);
+                this.name = "Calculator";
+            }
+
+            render() {
+                return (
+                    <div>
+                    calculator
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Main />,
+            document.getElementById('calculator')
+        );
+        //console.log(pricelist['hm19'].round);
+    </script>
+</body>
+</html>
