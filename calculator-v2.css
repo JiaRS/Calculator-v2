@@ -24,6 +24,9 @@ input[type="text"],select,input[type="number"]
 	min-width: 500px;
 	color: #000000;
 }
+#calculator a{
+	text-decoration: none;
+}
 table .right{
 	text-align: right;
 }
@@ -32,6 +35,10 @@ table .right{
 	font-weight: bold;
 	font-size: 20px;
 	width:100%;
+	padding: 10px 0;
+}
+.title .back{
+	float: left;
 }
 .pricelist{
 	text-align: left;

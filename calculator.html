@@ -58,7 +58,7 @@
             },
         }
         function Display(screen){
-            switch(screen) {
+            switch(screen.value) {
                 case "Prices":
                     return <Prices />;
                 case "Calculator":
@@ -70,25 +70,37 @@
         class Main extends React.Component {
             constructor(props) {
                 super(props);
-                this.history=["Prices"];
+                this.state = {
+                    history: ["Prices"]
+                };
             }
-            handleClick = () => {
-                alert("ha");
+            handleClick = (object) => {
+                //alert(object);
+                this.state.history.push("Calculator");
+                this.setState({
+                    history: this.state.history
+                });
+            }
+            back = () => {
+                this.state.history.pop();
+                this.setState({
+                    history: this.state.history
+                });
             }
             render() {
-                var screen = this.history.slice(-1).pop();
+                var screen = this.state.history.slice(-1).pop();
                 return (
                     <div>
-                        <div>
+                        <div className="title">
+                            {this.state.history.length>1 ? <a href="#" className="back" onClick={this.back}>Back</a> : ''}
                             {screen}
                         </div>
                         <Display value={screen} />
+                        <a onClick={this.handleClick}> click me </a>
                     </div>
                 );
             }
         }
-        //<Prices></Prices>
-        //<button onClick={this.handleClick}>click me</button>
         class Prices extends React.Component {
             constructor(props){
                 super(props);
@@ -98,7 +110,6 @@
             render() {
                 return (
                     <div>
-                        <span className="title">Prices</span>
                         <table className="pricelist">
                             <thead>
                             <tr>
@@ -132,7 +143,9 @@
                 return (
                     <div>
                     calculator
+                    hello
                     </div>
+
                 );
             }
         }
