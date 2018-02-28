@@ -246,31 +246,31 @@
                         name: "Points",
                         image: "ah",
                         form: function(index){
-                            return (<div>todo</div>);
+                            return (<div>Points TODO</div>);
                         }
                     },{
                         name: "King kill",
                         image: "ah",
                         form: function(index){
-                            return (<div>todo</div>);
+                            return (<div>king kill TODO</div>);
                         }
                     },{
                         name: "Comp Req",
                         image: "ah",
                         form: function(index){
-                            return (<div>todo</div>);
+                            return (<div>comp TODO</div>);
                         }
                     },{
                         name: "Trim Req",
                         image: "ah",
                         form: function(index){
-                            return (<div>todo</div>);
+                            return (<div>trim TODO</div>);
                         }
                     },{
                         name: "Hat",
                         image: "ah",
                         form: function(index){
-                            return (<div>todo</div>);
+                            return (<div>hat TODO</div>);
                         }
                     },{
                         name: "Insignia",
@@ -309,14 +309,14 @@
                         <form>
                             {this.state.services.length>0 ? <UserProgress /> : ''}
 
-                            {this.state.select ? <CalculatorGreeting OptionHandler={this.OptionHandler.bind(this)} options={this.options}/> : <a className="add" onClick={this.onNewServiceClick.bind(this)}>Add another service</a>}
+                            {this.state.select ? <CalculatorGreeting OptionHandler={this.OptionHandler.bind(this)} options={this.options}/> : <center><a className="add" onClick={this.onNewServiceClick.bind(this)}>+ Add another service</a></center>}
 
                             {
                                 this.state.services.map((service,index) => (
-                                    <div key={this.options[service].name+index} className="service"><a className="remove" onClick={this.removeService.bind(this,index)}>x</a>{this.options[service].form(index)}</div>
+                                    <div key={this.options[service].name+index} className="service"><a className="remove" onClick={this.removeService.bind(this,index)}>remove x</a>{this.options[service].form(index)}</div>
                                 ))
                             }
-                        
+
                         </form>
                     </div>
                 );
