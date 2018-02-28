@@ -73,15 +73,16 @@
                 this.state = {
                     history: ["Prices"]
                 };
+                this.handleClick = this.handleClick.bind(this);
+                this.back = this.back.bind(this);
             }
-            handleClick = (object) => {
-                //alert(object);
+            handleClick(props) {
                 this.state.history.push("Calculator");
                 this.setState({
                     history: this.state.history
                 });
             }
-            back = () => {
+            back(props) {
                 this.state.history.pop();
                 this.setState({
                     history: this.state.history
@@ -142,9 +143,63 @@
             render() {
                 return (
                     <div>
+                        <h3>Information</h3>
+                        <p>
+                        <label htmlFor="rsn">
+                            <span>RSN:</span>
+                        </label>
+                        <input id="rsn" name="rsn" type="text"></input>
+                        </p>
+
+                        <p>
+                        <label htmlFor="ba">
+                            <span>How much BA have you done since the rework?:</span>
+                        </label>
                         <select id="ba" name="ba">
                             <option value="none">None</option>
                         </select>
+                        </p>
+
+                    </div>
+                );
+            }
+        }
+        class CalculatorBXP extends React.Component {
+            constructor(props){
+                super(props);
+                this.value=props.value;
+            }
+            render() {
+                return (
+                    <div>
+                        <h3> BXP </h3>
+                        <p>
+                        <label htmlFor={"skill"+this.value}>
+                            <span>Skill:</span>
+                        </label>
+                        <input type="radio" id={"skill"+this.value} name={"skill"+this.value} value="agility"></input>Agility
+                        <input type="radio" id={"skill"+this.value} name={"skill"+this.value} value="firemaking"></input>Firemaking
+                        <input type="radio"id={"skill"+this.value} name={"skill"+this.value} value="mining"></input>Mining
+                        </p>
+
+                        <p>
+                        <label htmlFor={"level"+this.value}>
+                            <span>Level:</span>
+                        </label>
+                        <select id={"level"+this.value} name="level">
+                            {
+                                [...Array(100).keys()].slice(1).map(value => (
+                                    <option value={value} key={"level-"+this.value+"-"+value}>{value}</option>
+                                ))
+                            }
+                        </select>
+                        </p>
+                        <p>
+                        <label htmlFor="rsn">
+                            <span>Amount:</span>
+                        </label>
+                        <input id="rsn" name="rsn" type="text"></input>
+                        </p>
                     </div>
                 );
             }
@@ -152,36 +207,16 @@
         class CalculatorGreeting extends React.Component {
             constructor(props){
                 super(props);
-                this.options = [
-                    {
-                        name: "BXP",
-                        image: "ah"
-                    },{
-                        name: "Points",
-                        image: "ah"
-                    },{
-                        name: "King kill",
-                        image: "ah"
-                    },{
-                        name: "Comp Req",
-                        image: "ah"
-                    },{
-                        name: "Trim Req",
-                        image: "ah"
-                    },{
-                        name: "Hat",
-                        image: "ah"
-                    },
-                ];
+                this.options = this.props.options;
             }
             render() {
                 return (
-                    <div>
+                    <div className="selection">
                         What services are you interested in?
                         <div className="grid">
                             {
-                                this.options.map(option => (
-                                    <div className="option">
+                                this.options.map((option,index) => (
+                                    <div className="option" key={option.name} onClick={this.props.OptionHandler.bind(this,index)}>
                                         {option.name}
                                     </div>
                                 ))
@@ -196,16 +231,94 @@
             constructor(props){
                 super(props);
                 this.name = "Calculator";
+                this.state = {
+                    services: [],
+                    select: true
+                };
+                this.options = [
+                    {
+                        name: "BXP",
+                        image: "ah",
+                        form: function(index){
+                            return (<CalculatorBXP value={index}/>);
+                        }
+                    },{
+                        name: "Points",
+                        image: "ah",
+                        form: function(index){
+                            return (<div>todo</div>);
+                        }
+                    },{
+                        name: "King kill",
+                        image: "ah",
+                        form: function(index){
+                            return (<div>todo</div>);
+                        }
+                    },{
+                        name: "Comp Req",
+                        image: "ah",
+                        form: function(index){
+                            return (<div>todo</div>);
+                        }
+                    },{
+                        name: "Trim Req",
+                        image: "ah",
+                        form: function(index){
+                            return (<div>todo</div>);
+                        }
+                    },{
+                        name: "Hat",
+                        image: "ah",
+                        form: function(index){
+                            return (<div>todo</div>);
+                        }
+                    },{
+                        name: "Insignia",
+                        image: "ah",
+                        form: function(index){
+                            return (<div>todo</div>);
+                        }
+                    },
+                ];
+                this.OptionHandler = this.OptionHandler.bind(this);
             }
-
+            OptionHandler(props){
+                //alert(this.state.services);
+                this.state.services.push(props)
+                this.setState({
+                    services: this.state.services,
+                    select: false
+                });
+            }
+            removeService(props){
+                this.state.services.splice(props, 1);
+                this.setState({
+                    services: this.state.services,
+                });
+                {this.state.services.length<1 ? this.setState({select: true}) : false}
+            }
+            onNewServiceClick(props){
+                this.setState({
+                    services: this.state.services,
+                    select: true
+                });
+            }
             render() {
                 return (
-                    <div>
+                    <div className="calculator-main">
                         <form>
-                        <CalculatorGreeting />
+                            {this.state.services.length>0 ? <UserProgress /> : ''}
+
+                            {this.state.select ? <CalculatorGreeting OptionHandler={this.OptionHandler.bind(this)} options={this.options}/> : <a className="add" onClick={this.onNewServiceClick.bind(this)}>Add another service</a>}
+
+                            {
+                                this.state.services.map((service,index) => (
+                                    <div key={this.options[service].name+index} className="service"><a className="remove" onClick={this.removeService.bind(this,index)}>x</a>{this.options[service].form(index)}</div>
+                                ))
+                            }
+                        
                         </form>
                     </div>
-
                 );
             }
         }

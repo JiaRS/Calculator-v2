@@ -67,8 +67,32 @@ table .right{
 	font-size: 20px;
 	cursor: pointer;
 }
+.calculator-main{
+	position:relative;
+}
+.selection{
+	position: absolute;
+	top:0;
+	left:0;
+	background-color: white;
+	height:100%;
+	width:100%;
+	z-index:2;
+}
+.service{
+	position: relative;
+}
+.remove{
+	position: absolute;
+	top:0;
+	right:0;
+	cursor: pointer;
+}
+.add{
+	cursor: pointer;
+}
 .grid{
-	display:block;
+	display: block;
 	text-align: center;
 }
 .option{
@@ -81,4 +105,5 @@ table .right{
 	line-height: 150px;
 	background: #f0f0f0;
 	border: solid 1px black;
+	cursor: pointer;
 }
