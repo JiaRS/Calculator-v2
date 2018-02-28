@@ -90,13 +90,13 @@
             render() {
                 var screen = this.state.history.slice(-1).pop();
                 return (
-                    <div>
+                    <div className="main">
                         <div className="title">
-                            {this.state.history.length>1 ? <a href="#" className="back" onClick={this.back}>Back</a> : ''}
+                            {this.state.history.length>1 ? <a className="back" onClick={this.back}>&lt;Back</a> : ''}
                             {screen}
                         </div>
                         <Display value={screen} />
-                        <a onClick={this.handleClick}> click me </a>
+                        {this.state.history.length>1 ? '' : <a className="btn-nav" onClick={this.handleClick}> Calculate my service cost&#187; </a>}
                     </div>
                 );
             }
@@ -127,7 +127,66 @@
                                 </tr>
                             ))}
                             </tbody>
-                        </table>
+                        </table> <br />
+
+                        The cost is not calculated based on the time or specific goals, those are broken down into rounds. You pay per round, at the start of the round.
+                    </div>
+                );
+            }
+        }
+
+        class UserProgress extends React.Component {
+            constructor(props){
+                super(props);
+            }
+            render() {
+                return (
+                    <div>
+                        <select id="ba" name="ba">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                );
+            }
+        }
+        class CalculatorGreeting extends React.Component {
+            constructor(props){
+                super(props);
+                this.options = [
+                    {
+                        name: "BXP",
+                        image: "ah"
+                    },{
+                        name: "Points",
+                        image: "ah"
+                    },{
+                        name: "King kill",
+                        image: "ah"
+                    },{
+                        name: "Comp Req",
+                        image: "ah"
+                    },{
+                        name: "Trim Req",
+                        image: "ah"
+                    },{
+                        name: "Hat",
+                        image: "ah"
+                    },
+                ];
+            }
+            render() {
+                return (
+                    <div>
+                        What services are you interested in?
+                        <div className="grid">
+                            {
+                                this.options.map(option => (
+                                    <div className="option">
+                                        {option.name}
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 );
             }
@@ -142,8 +201,9 @@
             render() {
                 return (
                     <div>
-                    calculator
-                    hello
+                        <form>
+                        <CalculatorGreeting />
+                        </form>
                     </div>
 
                 );

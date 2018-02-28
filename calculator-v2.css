@@ -20,12 +20,16 @@ input[type="text"],select,input[type="number"]
     -webkit-text-size-adjust: 100%;
     margin: 0 auto;
     display: table;
-	max-width: 650px;
-	min-width: 500px;
+	width: 650px;
 	color: #000000;
 }
+
 #calculator a{
 	text-decoration: none;
+}
+
+#calculator .main{
+	padding: 6px 12px;
 }
 table .right{
 	text-align: right;
@@ -39,6 +43,7 @@ table .right{
 }
 .title .back{
 	float: left;
+	cursor: pointer;
 }
 .pricelist{
 	text-align: left;
@@ -47,6 +52,7 @@ table .right{
 	clear: both;
 	empty-cells: show;
 	width: 100%;
+	padding: 6px;
 }
 .pricelist th{
 	text-align: center;
@@ -54,4 +60,25 @@ table .right{
 .pricelist th, .pricelist td{
 	border: 1px solid #232323;
 	padding: 3px 5px;
+}
+.btn-nav{
+	padding: 10px;
+	float: right;
+	font-size: 20px;
+	cursor: pointer;
+}
+.grid{
+	display:block;
+	text-align: center;
+}
+.option{
+	padding: 10px;
+	height: 150px;
+	width: 150px;
+	margin: 4px;
+	display:inline-block;
+	vertical-align: middle;
+	line-height: 150px;
+	background: #f0f0f0;
+	border: solid 1px black;
 }
